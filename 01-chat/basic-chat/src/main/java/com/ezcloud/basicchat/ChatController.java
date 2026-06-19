@@ -1,4 +1,4 @@
-package com.example.basicchat;
+package com.ezcloud.basicchat;
 
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.web.bind.annotation.GetMapping;
