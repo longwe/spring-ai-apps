@@ -10,13 +10,14 @@ mvn spring-boot:run
 
 ## Structure
 
-| Folder | Topic |
-|--------|-------|
-| [01-chat](01-chat/) | Chat models, streaming, conversation memory |
-| [02-rag](02-rag/) | Retrieval-augmented generation |
-| [03-prompts](03-prompts/) | Prompt templates and engineering |
-| [04-structured-output](04-structured-output/) | JSON and typed model responses |
-| [05-agents](05-agents/) | Tool calling and agentic patterns |
+| Folder                                         | Topic                                         |
+|------------------------------------------------|-----------------------------------------------|
+| [01-chat](01-chat/)                            | Chat models, streaming, conversation memory   |
+| [02-rag](02-rag/)                              | Retrieval-augmented generation                |
+| [03-prompts](03-prompts/)                      | Prompt templates and engineering              |
+| [04-structured-output](04-structured-output/) | JSON and typed model responses                |
+| [05-agents](05-agents/)                        | Tool calling and agentic patterns             |
+| [06-koog-agents](06-koog-agents/)              | AI agents using JetBrains Koog framework      |
 
 ## Root POM
 
@@ -29,8 +30,8 @@ from the root:
 
 ```xml
 <parent>
-    <groupId>com.example</groupId>
-    <artifactId>spring-ai-apps</artifactId>
+    <groupId>com.ezcloud</groupId>
+    <artifactId>spring-ai-apps-rag</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <relativePath>../../pom.xml</relativePath>
 </parent>
