@@ -5,3 +5,20 @@ spring:
       chat:
         options:
           model: gpt-4o-mini
+    anthropic:
+      api-key: ${ANTHROPIC_API_KEY}
+      chat:
+        options:
+          model: claude-sonnet-4-6
+    google:
+      genai:
+        api-key: ${GEMINI_API_KEY}
+        chat:
+          options:
+            model: gemini-2.0-flash
+
+# OpenAI-compatible providers (Groq, DeepSeek, Llama) require separate ChatClient
+# beans with custom base-url — configure in code when needed:
+#   Groq:     base-url: https://api.groq.com/openai, api-key: ${GROQ_API_KEY}
+#   DeepSeek: base-url: https://api.deepseek.com/v1,  api-key: ${DEEPSEEK_API_KEY}
+#   Llama:    base-url: https://api.llama-api.com,    api-key: ${LLAMA_API_KEY}
