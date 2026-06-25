@@ -1,4 +1,4 @@
-package com.ezcloud.basicchat;
+package com.ezcloud.basicchat.aiconfig;
 
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.openai.OpenAiChatModel;
