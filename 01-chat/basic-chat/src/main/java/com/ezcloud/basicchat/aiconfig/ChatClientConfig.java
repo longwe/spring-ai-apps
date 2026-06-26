@@ -1,6 +1,8 @@
 package com.ezcloud.basicchat.aiconfig;
 
+import org.springframework.ai.anthropic.AnthropicChatModel;
 import org.springframework.ai.chat.client.ChatClient;
+import org.springframework.ai.google.genai.GoogleGenAiChatModel;
 import org.springframework.ai.openai.OpenAiChatModel;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -11,7 +13,22 @@ public class ChatClientConfig {
 
     @Bean
     @Primary
-    public ChatClient.Builder chatClientBuilder(OpenAiChatModel openAiChatModel) {
-        return ChatClient.builder(openAiChatModel);
+    public ChatClient.Builder chatClientBuilder(OpenAiChatModel model) {
+        return ChatClient.builder(model);
+    }
+
+    @Bean
+    public ChatClient openAiChatClient(OpenAiChatModel model) {
+        return ChatClient.builder(model).build();
+    }
+
+    @Bean
+    public ChatClient anthropicChatClient(AnthropicChatModel model) {
+        return ChatClient.builder(model).build();
+    }
+
+    @Bean
+    public ChatClient googleChatClient(GoogleGenAiChatModel model) {
+        return ChatClient.builder(model).build();
     }
 }

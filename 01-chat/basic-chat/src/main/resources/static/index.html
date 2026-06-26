@@ -69,12 +69,12 @@
     }
 
     .header-info h1 {
-      font-size: 1rem;
+      font-size: 1.15rem;
       font-weight: 600;
     }
 
     .header-info p {
-      font-size: 0.75rem;
+      font-size: 0.85rem;
       opacity: 0.75;
     }
 
@@ -159,7 +159,7 @@
     .message-row.user .message-col { align-items: flex-end; }
 
     .sender-label {
-      font-size: 0.7rem;
+      font-size: 0.8rem;
       font-weight: 600;
       color: var(--muted);
       padding: 0 6px;
@@ -170,8 +170,8 @@
     .bubble {
       padding: 12px 16px;
       border-radius: var(--radius);
-      font-size: 0.92rem;
-      line-height: 1.6;
+      font-size: 1.05rem;
+      line-height: 1.7;
       white-space: pre-wrap;
       word-break: break-word;
     }
@@ -226,6 +226,49 @@
 
     @keyframes blink { 50% { opacity: 0; } }
 
+    /* Model selector */
+    .model-bar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 20px;
+      border-top: 1px solid var(--border);
+      background: #fafbff;
+      flex-shrink: 0;
+    }
+
+    .model-bar label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      white-space: nowrap;
+    }
+
+    .model-btn {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      border-radius: 20px;
+      border: 1.5px solid var(--border);
+      background: var(--surface);
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--muted);
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .model-btn:hover { border-color: var(--primary); color: var(--primary); }
+
+    .model-btn.active {
+      border-color: var(--primary);
+      background: var(--primary);
+      color: #fff;
+    }
+
     /* Input area */
     .input-area {
       display: flex;
@@ -242,7 +285,7 @@
       padding: 12px 16px;
       border: 1.5px solid var(--border);
       border-radius: 14px;
-      font-size: 0.92rem;
+      font-size: 1.05rem;
       font-family: inherit;
       resize: none;
       outline: none;
@@ -298,6 +341,13 @@
       </div>
     </div>
 
+    <div class="model-bar">
+      <label>Model</label>
+      <button class="model-btn active" data-model="openai">🤖 OpenAI</button>
+      <button class="model-btn" data-model="anthropic">✳️ Anthropic</button>
+      <button class="model-btn" data-model="gemini">💎 Gemini</button>
+    </div>
+
     <div class="input-area">
       <textarea id="input" rows="1" placeholder="Type a message… (Enter to send, Shift+Enter for new line)"></textarea>
       <button class="send-btn" id="send" title="Send">
@@ -315,6 +365,17 @@
     const emptyState = document.getElementById('emptyState');
     const inputEl   = document.getElementById('input');
     const sendBtn   = document.getElementById('send');
+
+    // Model selection
+    let selectedModel = 'openai';
+    const modelBtns = document.querySelectorAll('.model-btn');
+    modelBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        modelBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        selectedModel = btn.dataset.model;
+      });
+    });
 
     // Auto-resize textarea
     inputEl.addEventListener('input', () => {
@@ -337,7 +398,7 @@
 
       const label = document.createElement('div');
       label.className = 'sender-label';
-      label.textContent = role === 'user' ? 'You' : 'Assistant';
+      label.textContent = role === 'user' ? 'You' : selectedModel.charAt(0).toUpperCase() + selectedModel.slice(1);
 
       col.appendChild(label);
       row.appendChild(avatar);
@@ -380,7 +441,7 @@
       messagesEl.scrollTop = messagesEl.scrollHeight;
 
       try {
-        const res = await fetch(`/chat/stream?message=${encodeURIComponent(message)}`, {
+        const res = await fetch(`/chat/stream?message=${encodeURIComponent(message)}&model=${selectedModel}`, {
           headers: { Accept: 'text/event-stream' }
         });
 
