@@ -12,7 +12,8 @@ mvn spring-boot:run
 
 | Folder                                         | Topic                                         |
 |------------------------------------------------|-----------------------------------------------|
-| [01-chat](01-chat/)                            | Chat models, streaming, conversation memory   |
+| [01-chat/basic-chat](01-chat/basic-chat/)                | Chat with multi-model support and streaming   |
+| [01-chat/chat-with-memory](01-chat/chat-with-memory/)    | Chat with per-session conversation memory     |
 | [02-rag](02-rag/)                              | Retrieval-augmented generation                |
 | [03-prompts](03-prompts/)                      | Prompt templates and engineering              |
 | [04-structured-output](04-structured-output/) | JSON and typed model responses                |
